@@ -11,7 +11,74 @@ public class MemberServlet extends HttpServlet
   
               throws ServletException,java.io.IOException
 	          {
-                resp.getWriter().println("This is a simple servlet program");
+                try
+                {
+                  Class.forName("com.mysql.jdbc.Driver").newInstance();
+                } catch(Exception ex)
+                {
+                
+                } 
+                Connection conn = null;
+                Statement stmt = null;
+                ResultSet rs = null;
+                try
+                {
+                  conn = DriverManager.getConnection("jdbc://localhost/test?"
+                                                     + "user=root"
+                                                     + "&password=");
+                  stmt = conn.createStatement();
+                  String sql = "SELECT * from member";
+                  System.out.println("SQL:" + sql);
+                  rs = stmt.executeQuery(sql);
+                  while(rs.next())
+                  {
+                    long id = rs.getLong("id");
+                    String firstName =  rs.getString("first_name");
+                    String lastName = rs.getString("last_name");
+                    resp.getWriter().println(id + " : " + firstName + " " + lastName + "\n");
+                  }
+                }catch (SQLException ex)
+                {
+                  System.out.println("SQLException: " + ex.getMessage());
+                  System.out.println("SQLState: " + ex.getSQLState());
+                  System.out.println("VendorError: " + ex.getErrorCode());
+                  resp.getWriter().println("Error!");
+                } finally 
+                {
+                  if (rs != null)
+                  {
+                    try
+                    {
+                      rs.close();
+                    } catch(SQLException sqlEx)
+                    {
+                    
+                    }
+                    rs = null;
+                  }
+                  if (conn != null)
+                  {
+                    try 
+                    {
+                      conn.close();
+                    } catch (SQLException sqlEx)
+                    {
+                    
+                    }
+                    conn = null;
+                  }
+                  if (stmt != null)
+                  {
+                    try
+                    {
+                      stmt.close();
+                    } catch (SQLException sqlEx)
+                    {
+                       
+                    }
+                    stmt = null;
+                  }
+                }
 	          }
   
 
