@@ -11,6 +11,7 @@ public class MemberServlet extends HttpServlet
   
               throws ServletException,java.io.IOException
 	          {
+                resp.setContentType("text/html;charset=UTF-8");
                 try
                 {
                   Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -37,6 +38,7 @@ public class MemberServlet extends HttpServlet
                     String lastName = rs.getString("last_name");
                     resp.getWriter().println(id + " : " + firstName + " " + lastName + "\n");
                   }
+                    resp.getWriter().println("<br/><a href=\".\">Back</a>");
                 }catch (SQLException ex)
                 {
                   System.out.println("SQLException: " + ex.getMessage());
