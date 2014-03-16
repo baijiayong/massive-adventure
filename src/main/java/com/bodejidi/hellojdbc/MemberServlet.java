@@ -18,8 +18,8 @@ public class MemberServlet extends HttpServlet
               throws ServletException,java.io.IOException
               {
                 resp.getWriter().println(req.getParameter("first_name")
-                                         + " " 
-			                             + req.getParameter("last_name"));
+                                         + " "
+                                         + req.getParameter("last_name"));
               }
   
 }
