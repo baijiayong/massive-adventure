@@ -17,9 +17,9 @@ public class MemberServlet extends HttpServlet
   public void doPost(HttpServletRequest req,HttpServletResponse resp)
               throws ServletException,java.io.IOException
               {
-              resp.getWriter().println(req.getParameter("first_name")
-                                        + " " 
-			                            + req.getParameter("last_name"));
+                resp.getWriter().println(req.getParameter("first_name")
+                                         + " " 
+			                             + req.getParameter("last_name"));
               }
   
 }
