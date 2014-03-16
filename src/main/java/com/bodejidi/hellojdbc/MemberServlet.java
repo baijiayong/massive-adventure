@@ -23,7 +23,7 @@ public class MemberServlet extends HttpServlet
                 ResultSet rs = null;
                 try
                 {
-                  conn = DriverManager.getConnection("jdbc://localhost/test?"
+                  conn = DriverManager.getConnection("jdbc:mysql://localhost/test?"
                                                      + "user=root"
                                                      + "&password=");
                   stmt = conn.createStatement();
@@ -85,6 +85,7 @@ public class MemberServlet extends HttpServlet
   public void doPost(HttpServletRequest req,HttpServletResponse resp)
               throws ServletException,java.io.IOException
               {
+                resp.setContentType("text/html;charset=UTF-8");
                 String firstName = req.getParameter("first_name");
                 String lastName = req.getParameter("last_name");
                 
@@ -108,7 +109,8 @@ public class MemberServlet extends HttpServlet
                                + "VALUES('" + firstName + "','" + lastName + "',now(),now());";
                   System.out.println("SQL: " + sql); 
                   stmt.execute(sql);
-                  resp.getWriter().println("Add " + firstName + " " + lastName + " success!");                  
+                  resp.getWriter().println("Add " + firstName + " " + lastName + " success!");  
+                  resp.getWriter().println(" <br/><a href=\"\"> Member List </a>");                  
                 } catch(SQLException ex) 
                 {
                   System.out.println("SQLException: " + ex.getMessage());
