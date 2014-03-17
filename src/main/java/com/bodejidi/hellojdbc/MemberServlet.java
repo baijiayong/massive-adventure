@@ -109,6 +109,7 @@ public class MemberServlet extends HttpServlet
                   stmt = conn.createStatement();
                   String sql = "INSERT INTO member(first_name,last_name,created_date,updated_time)" 
                                + "VALUES('" + firstName + "','" + lastName + "',now(),now());";
+                  
                   System.out.println("SQL: " + sql); 
                   stmt.execute(sql);
                   resp.getWriter().println("Add " + firstName + " " + lastName + " success!");  
